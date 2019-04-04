@@ -1,0 +1,27 @@
+{
+    "mode": "All",
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "like": "Microsoft.Network/networkinterfaces"
+          },
+          {
+            "field": "Microsoft.Network/networkInterfaces/ipconfigurations[*].publicIpAddress.id",
+            "exists": "true"
+          },
+          {
+            "not": {
+              "field": "Microsoft.Network/networkInterfaces/ipconfigurations[*].subnet.id",
+              "notequals": "/subscriptions/{subscriptionGUID}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/WEB"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    },
+    "parameters": {}
+  }
