@@ -1,0 +1,106 @@
+{
+  "mode": "All",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Compute/virtualMachines"
+        }
+      ]
+    },
+    "then": {
+      "effect": "deployIfNotExists",
+      "details": {
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "roleDefinitionIds": [
+          "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+        ],
+        "existenceCondition": {
+          "allOf": [
+            {
+              "field": "Microsoft.Compute/virtualMachines/extensions/type",
+              "equals": "AzureDiskEncryption"
+            },
+            {
+              "field": "Microsoft.Compute/virtualMachines/extensions/publisher",
+              "equals": "Microsoft.Azure.Security"
+            },
+            {
+              "field": "Microsoft.Compute/virtualMachines/extensions/provisioningState",
+              "equals": "Succeeded"
+            }
+          ]
+        },
+        "deployment": {
+          "properties": {
+            "mode": "incremental",
+            "template": {
+              "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                "vmName": {
+                  "type": "string"
+                },
+                "location": {
+                  "type": "string"
+                },
+                "keyVaultResourceGroup": {
+                  "type": "string"
+                },
+                "keyVaultName": {
+                  "type": "string"
+                }
+              },
+              "variables": {
+                "vmExtensionName": "AzureDiskEncryption",
+                "keyVaultResourceID": "[resourceId(parameters('keyVaultResourceGroup'), 'Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
+              },
+              "resources": [
+                {
+                  "name": "[concat(parameters('vmName'), '/', variables('vmExtensionName'))]",
+                  "type": "Microsoft.Compute/virtualMachines/extensions",
+                  "location": "[parameters('location')]",
+                  "apiVersion": "2018-06-01",
+                  "properties": {
+                    "publisher": "Microsoft.Azure.Security",
+                    "type": "AzureDiskEncryption",
+                    "typeHandlerVersion": "2.2",
+                    "autoUpgradeMinorVersion": true,
+                    "settings": {
+                      "EncryptionOperation": "EnableEncryption",
+                      "KeyVaultURL": "[reference(variables('keyVaultResourceId'),'2016-10-01').vaultUri]",
+                      "KeyVaultResourceId": "[variables('keyVaultResourceID')]",
+                      "VolumeType": "All"
+                    }
+                  }
+                }
+              ],
+              "outputs": {
+                "policy": {
+                  "type": "string",
+                  "value": "[concat('Enabled encryption for VM', ': ', parameters('vmName'))]"
+                }
+              }
+            },
+            "parameters": {
+              "vmName": {
+                "value": "[field('name')]"
+              },
+              "location": {
+                "value": "[field('location')]"
+              },
+              "keyVaultResourceGroup": {
+                "value": "KEYVAULT's RESOURCE GROUP NAME"
+              },
+              "keyVaultName": {
+                "value": "KEYVAULT NAME"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
