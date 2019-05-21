@@ -1,0 +1,28 @@
+{
+  "mode": "Indexed",
+  "policyRule": {
+    "if": {
+      "field": "[concat('tags[', parameters('tagName'), ']')]",
+      "exists": "false"
+    },
+    "then": {
+      "effect": "[parameters('actionTake')]"
+    }
+  },
+  "parameters": {
+    "tagName": {
+      "type": "String",
+      "metadata": {
+        "displayName": "Tag Name",
+        "description": "Name of the tag, such as 'environment'"
+      }
+    },
+    "actionTake": {
+      "type": "String",
+      "metadata": {
+        "displayName": "Action Take",
+        "description": "Action to take on this policy Audit or Deny"
+      }
+    }
+  }
+}
