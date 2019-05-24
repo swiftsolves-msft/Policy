@@ -1,0 +1,29 @@
+{
+    "mode": "Indexed",
+    "policyRule": {
+      "if": {
+        "not": {
+          "field": "[concat('tags[', parameters('tagName'), ']')]",
+          "match": "####-##-##"
+        }
+      },
+      "then": {
+        "effect": "append",
+        "details": [
+          {
+            "field": "[concat('tags[', parameters('tagName'), ']')]",
+            "value": "[utcNow()]"
+          }
+        ]
+      }
+    },
+    "parameters": {
+      "tagName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Tag Name",
+          "description": "Name of the tag, such as 'creationDate'"
+        }
+      }
+    }
+  }
