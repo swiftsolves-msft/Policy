@@ -1,0 +1,77 @@
+{
+  "mode": "All",
+  "policyRule": {
+    "if": {
+      "field": "type",
+      "equals": "Microsoft.Storage/storageAccounts"
+    },
+    "then": {
+      "effect": "deployIfNotExists",
+      "details": {
+        "type": "Microsoft.Storage/storageAccounts",
+        "name": "[field('name')]",
+        "roleDefinitionIds": [
+          "/providers/Microsoft.Authorization/roleDefinitions/17d1049b-9a84-46fb-8f53-869881c3d3ab"
+        ],
+        "existenceCondition": {
+          "field": "Microsoft.Storage/storageAccounts/networkAcls.defaultAction",
+          "equals": "Deny"
+        },
+        "deployment": {
+          "properties": {
+            "mode": "incremental",
+            "template": {
+              "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                "storeName": {
+                  "type": "String"
+                },
+                "loc": {
+                  "type": "String"
+                },
+                "skind": {
+                  "type": "String"
+                }
+              },
+              "resources": [
+                {
+                  "type": "Microsoft.Storage/storageAccounts",
+                  "apiVersion": "2019-04-01",
+                  "name": "[parameters('storeName')]",
+                  "location": "[parameters('loc')]",
+                  "kind": "[parameters('skind')]",
+                  "properties": {
+                    "networkAcls": {
+                      "bypass": "AzureServices",
+                      "virtualNetworkRules": [],
+                      "ipRules": [
+                        {
+                          "value": "YOUR PUBLIC IP DATA CENTER to allow access",
+                          "action": "Allow"
+                        }
+                      ],
+                      "defaultAction": "Deny"
+                    }
+                  }
+                }
+              ]
+            },
+            "parameters": {
+              "storeName": {
+                "value": "[field('name')]"
+             },
+              "loc": {
+                "value": "[field('location')]"
+              },
+              "skind": {
+                "value": "[field('kind')]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
