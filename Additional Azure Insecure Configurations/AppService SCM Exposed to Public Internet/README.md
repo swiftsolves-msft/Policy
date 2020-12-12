@@ -4,4 +4,4 @@ App Service also deploys Kudo or KudoLite SCM administrator portal, by default t
 
 https://docs.microsoft.com/en-us/azure/app-service/app-service-ip-restrictions#scm-site
 
-[Inspiration came from reading about vulnerabilities in App Service that were patched some time ago] (https://www.intezer.com/blog/cloud-security/kud-i-enter-your-server-new-vulnerabilities-in-microsoft-azure/ "Inspiration came from reading about vulnerabilities in App Service that were patched some time ago")
+[Inspiration came from reading about vulnerabilities in App Service that were patched some time ago](https://www.intezer.com/blog/cloud-security/kud-i-enter-your-server-new-vulnerabilities-in-microsoft-azure/ "Inspiration came from reading about vulnerabilities in App Service that were patched some time ago")
