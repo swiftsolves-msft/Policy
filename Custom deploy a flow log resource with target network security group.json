@@ -152,13 +152,12 @@
                               "retentionPolicy": {
                                 "days": "0",
                                 "enabled": "false"
-                              }
-                            },
-                            "format": {
+                              },
+                              "format": {
                                 "type": "JSON",
                                 "version": 2
-                            },
-                            "flowAnalyticsConfiguration": {
+                              },
+                              "flowAnalyticsConfiguration": {
                                 "networkWatcherFlowAnalyticsConfiguration": {
                                 "enabled": true,
                                 "workspaceId": "[parameters('workspaceId')]",
@@ -166,6 +165,7 @@
                                 "workspaceResourceId": "[parameters('logAnalyticsWorkspaceId')]",
                                 "trafficAnalyticsInterval": 10
                                 }
+                              }
                             }
                           }
                         ]
