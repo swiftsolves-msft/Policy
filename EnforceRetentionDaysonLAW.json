@@ -1,0 +1,42 @@
+{
+  "mode": "All",
+  "policyRule": {
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "like": "microsoft.operationalinsights/workspaces"
+        },
+        {
+            "value": "microsoft.operationalinsights/workspaces/retentionInDays",
+            "notequals": "[parameters('retentionInDays')]"
+        }
+      ]
+    },
+    "then": {
+      "effect": "[parameters('actionTake')]"
+    }
+  },
+  "parameters": {
+    "actionTake": {
+      "type": "String",
+      "metadata": {
+        "displayName": "Action Take",
+        "description": "Action to take on this policy Audit or Deny"
+      },
+      "allowedValues": [
+        "Audit",
+        "Deny"
+      ],
+      "defaultValue": "Audit"
+    },
+    "retentionInDays": {
+        "type": "Integer",
+        "metadata": {
+          "displayName": "Workspace Retention",
+          "description": "Retention for data by number of days in workspace"
+        },
+        "defaultValue": 30
+      }
+  }
+}
