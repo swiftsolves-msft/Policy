@@ -5,7 +5,7 @@ This policy deploys AAD login for Linux SSH extension on Linux virtual machines.
 
 ## Try on Portal
 
-[![Deploy to Azure](https://docs.microsoft.com/en-us/azure/governance/policy/media/deploy/deploybutton.png)](https://portal.azure.com/?#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Security-Center%2Fmaster%2FRemediation%2520scripts%2FEnable%2520the%2520built-in%2520vulnerability%2520assessment%2520solution%2520on%2520virtual%2520machines%2520%28powered%2520by%2520Qualys%29%2FAzure%2520Policy%2Fdeploy-aadlogin.json)
+[![Deploy to Azure](https://docs.microsoft.com/en-us/azure/governance/policy/media/deploy/deploybutton.png)](https://portal.azure.com/?#blade/Microsoft_Azure_Policy/CreatePolicyDefinitionBlade/uri/https%3A%2F%2Fraw.githubusercontent.comswiftsolves-msft%2FPolicy%2Fmaster%2F%5BPreview%5D%20Deploy%20AAD%20Login%20For%20Linux%20SSH%20extension%20on%20Linux%20virtual%20machines%2Fdeploy-aadlogin.json)
 
 # Contributing
 
