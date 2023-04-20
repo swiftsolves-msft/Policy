@@ -17,7 +17,7 @@
         ],
         "existenceCondition": {
           "field": "Microsoft.Security/pricings/pricingTier",
-          "equals": "Free"
+          "equals": "Standard"
         },
         "deployment": {
           "location": "westeurope",
