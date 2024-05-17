@@ -58,7 +58,7 @@
                         "[parameters('appName')]"
                       ],
                       "properties": {
-                        "ipSecurityRestrictions": [
+                        "scmIpSecurityRestrictions": [
                           {
                             "ipAddress": "YOUR-DATACENTER-IP/32",
                             "action": "Allow",
