@@ -1,0 +1,1 @@
+The following folder contains examples of new Defender for Cloud custom policies that leverage KQL
