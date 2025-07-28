@@ -1,6 +1,6 @@
 //Bastion allows shareable link
 RawEntityMetadata
-  | where Environment == 'AZURE' and Identifiers.Type == 'microsoft.network/bastionhosts'
+  | where Environment == 'Azure' and Identifiers.Type == 'microsoft.network/bastionhosts'
   | extend EnableShareableLink = tobool(Record.properties.enableShareableLink)
   | extend HealthStatus = iff(isnotnull(EnableShareableLink) and EnableShareableLink == false, 'HEALTHY', 'UNHEALTHY')
   | project Id, Name, Environment, Identifiers, AdditionalData, Record, HealthStatus
