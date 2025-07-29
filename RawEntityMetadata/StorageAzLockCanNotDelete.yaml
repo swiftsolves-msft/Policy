@@ -1,0 +1,11 @@
+//Ensure Azure resource lock can not delete is applied to storage
+let protectedScopes = RawEntityMetadata
+| where Environment == 'Azure' and Identifiers.Type == 'microsoft.authorization/locks'
+| where Record.level == 'CanNotDelete'
+| project Scope = tolower(Record.scope)
+| distinct Scope;
+RawEntityMetadata
+| where Environment == 'Azure' and Identifiers.Type == 'microsoft.storage/storageaccounts'
+| extend LowerId = tolower(Id)
+| extend HealthStatus = iff(LowerId in (protectedScopes), 'HEALTHY', 'UNHEALTHY')
+| project Id, Name, Environment, Identifiers, AdditionalData, Record, HealthStatus
